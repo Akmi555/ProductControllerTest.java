@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+
+    <!--    Добавить primary key к полю-->
+    <changeSet id="add-primary-key-constrains-to-product" author="SergeyBugaenko">
+        <addPrimaryKey tableName="product" columnNames="id" constraintName="PK_product"/>
+    </changeSet>
+
+    <!--   Изменение имени колонки -->
+    <changeSet id="1723823745579-1" author="SergeyB">
+        <renameColumn tableName="product" oldColumnName="roduct" newColumnName="product" columnDataType="varchar(64)"/>
+    </changeSet>
+
+    <!--    Удаление таблицы-->
+    <changeSet id="1723823907350-1" author="SergeyB">
+        <dropTable tableName="product"/>
+    </changeSet>
+
+    <!--    Удаление ограничения на колонку-->
+    <changeSet id="1723824031245-1" author="SergeyB">
+        <dropUniqueConstraint
+                tableName="product"
+                constraintName="product_title_key"/>
+<!--                customer_name_key-->
+    </changeSet>
+
+    <!--    SELECT constraint_name FROM information_schema.table_constraints
+    WHERE table_name = 'product' AND constraint_type = 'UNIQUE'-->
+
+</databaseChangeLog>
