@@ -11,9 +11,10 @@ public interface ProductMappingService {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "active", constant = "true")
-    public Product mapDtoToEntity(ProductDTO dto);
+    @Mapping(target = "image", ignore = true)
+    Product mapDtoToEntity(ProductDTO dto);
 
-    public ProductDTO mapEntityToDto(Product entity);
+    ProductDTO mapEntityToDto(Product entity);
 
 //    public Product mapDtoToEntity(ProductDTO dto){
 //        Product entity = new Product();

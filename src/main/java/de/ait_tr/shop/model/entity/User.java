@@ -23,6 +23,12 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "active")
+    private boolean active;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
@@ -33,20 +39,42 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return String.format("User : id - %d, userName - %s, roles - %s",
-                id, userName, roles == null ? "[]" : roles);
+        return String.format("User : id - %d, userName - %s, roles - %s, active - %s",
+                id, userName, roles == null ? "[]" : roles, active ? "yes" : "no");
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+        return active == user.active && Objects.equals(id, user.id) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(roles, user.roles);
     }
+
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, password, roles);
+        return Objects.hash(id, userName, password, email, active, roles);
+    }
+
+//    public String getEmail(String mailUsername) {
+//        return email;
+//    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Long getId() {

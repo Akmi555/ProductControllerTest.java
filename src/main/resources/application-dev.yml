@@ -16,6 +16,21 @@ spring:
       hibernate:
         auto_quote_keyword: true
 
+  mail:
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            protocol: TLSv1.2
+            trust: smtp.gmail.com
+          debug: true
 
 server:
   servlet:

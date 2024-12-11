@@ -36,6 +36,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 //                        .anyRequest().permitAll()
                         .requestMatchers(HttpMethod.GET, "/hello").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/register", "auth/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/confirm").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/login", "/auth/refresh").permitAll()
                         .requestMatchers("/swagger-ui/**", "v3/api-docs").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products").permitAll() // разрешено всем

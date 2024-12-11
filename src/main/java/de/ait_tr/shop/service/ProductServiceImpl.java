@@ -1,13 +1,13 @@
 package de.ait_tr.shop.service;
 
 import de.ait_tr.shop.exception_handling.exceptions.FirstTestException;
-import de.ait_tr.shop.exception_handling.exceptions.SecondTestException;
 import de.ait_tr.shop.exception_handling.exceptions.ThirdTestException;
 import de.ait_tr.shop.model.dto.ProductDTO;
 import de.ait_tr.shop.model.entity.Product;
 import de.ait_tr.shop.repository.ProductRepository;
 import de.ait_tr.shop.service.interfaces.ProductService;
 import de.ait_tr.shop.service.mapping.ProductMappingService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,14 +18,27 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository repository;
     private final ProductMappingService mapper;
+    private final ProductRepository productRepository;
 
 //    private Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-    public ProductServiceImpl(ProductRepository repository, ProductMappingService mapper) {
+    public ProductServiceImpl(ProductRepository repository, ProductMappingService mapper, ProductRepository productRepository) {
         this.repository = repository;
         this.mapper = mapper;
+        this.productRepository = productRepository;
     }
 
+    @Transactional // эта аннотация гарантирует полное
+                    // выполнение метода в транзакции
+    @Override
+    public void attachImage(String imageUrl, String productTitle) {
+        // Ищем продукт в базе по названию
+        Product product = productRepository.findByTitle(productTitle)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        //Присваиваем продукт ссылку на изображение
+        product.setImage(imageUrl);
+    }
 
     @Override
     public ProductDTO saveProduct(ProductDTO productDTO) {

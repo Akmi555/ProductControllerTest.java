@@ -29,7 +29,7 @@
 <!--                customer_name_key-->
     </changeSet>
 
-    <!--    SELECT constraint_name FROM information_schema.table_constraints
+<!--    SELECT constraint_name FROM information_schema.table_constraints
     WHERE table_name = 'product' AND constraint_type = 'UNIQUE'-->
 
 </databaseChangeLog>

@@ -25,6 +25,8 @@ public class ProductDTO {
     @DecimalMax(value = "100000.0", message = "Product price should be less or l than 100_000")
     private BigDecimal price; // null
 
+    private String image;
+
 
     @Override
     public String toString() {
@@ -56,16 +58,23 @@ public class ProductDTO {
         this.price = price;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductDTO that = (ProductDTO) o;
-        return Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(price, that.price);
+        if (!(o instanceof ProductDTO dto)) return false;
+        return Objects.equals(id, dto.id) && Objects.equals(title, dto.title) && Objects.equals(price, dto.price) && Objects.equals(image, dto.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, price);
+        return Objects.hash(id, title, price, image);
     }
 }

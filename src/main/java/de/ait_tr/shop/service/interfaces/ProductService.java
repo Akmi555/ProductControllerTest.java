@@ -16,6 +16,8 @@ import java.util.List;
 
 public interface ProductService {
 
+    void attachImage(String imageUrl, String productTitle);
+
     public ProductDTO saveProduct(ProductDTO productDTO);
 
     public ProductDTO getById(long id);

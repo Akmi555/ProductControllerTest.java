@@ -118,7 +118,7 @@ public class ProductController {
 
 //    // DELETE / products?id=1&title=Banana
 //    @DeleteMapping
-//    public  ProductremovUniversal(@RequestParam(required = false) Long id,
+//    public  Product removUniversal(@RequestParam(required = false) Long id,
 //                                  @RequestParam(required = false)String title){
 //       if(id != null){
 //           return productService.remove(id);

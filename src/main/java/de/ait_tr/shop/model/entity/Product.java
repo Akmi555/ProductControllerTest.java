@@ -16,6 +16,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id")
     private Long id; // null // long / 0
+
     @Schema(description = "Product title", example = "Banana")
     @Column(name = "title")
     private String title; // null
@@ -27,6 +28,9 @@ public class Product {
     @Schema(description = "Is product available", accessMode = Schema.AccessMode.READ_ONLY)
     @Column(name = "active")
     private boolean active; // false // Boolean / null
+
+    @Column(name = "image")
+    private String image;
 
     @Override
     public String toString() {
@@ -66,16 +70,23 @@ public class Product {
         this.active = active;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return active == product.active && Objects.equals(id, product.id) && Objects.equals(title, product.title) && Objects.equals(price, product.price);
+        if (!(o instanceof Product product)) return false;
+        return active == product.active && Objects.equals(id, product.id) && Objects.equals(title, product.title) && Objects.equals(price, product.price) && Objects.equals(image, product.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, price, active);
+        return Objects.hash(id, title, price, active, image);
     }
 }
